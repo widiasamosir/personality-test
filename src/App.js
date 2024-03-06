@@ -101,30 +101,36 @@ function App() {
   const personalityDescriptions = {
     Apple: {
       description: "For those who are outgoing, logical, and organized. You thrive in structured environments and excel at problem-solving.",
-      weekdayActivity: "On weekdays, you may benefit from setting clear goals and prioritizing tasks to stay organized and productive. Engage in activities that challenge your intellect and allow you to demonstrate your leadership skills.",
-      weekendActivity: "On weekends, consider spending time with friends and family, participating in social events or outdoor activities. Balance your need for relaxation with opportunities for adventure and exploration."
+      weekdayActivity: "On weekdays, you may benefit from setting clear goals and prioritizing tasks to stay organized and productive. Start your day by writing tasks and grabbing a coffee to gain more focus. After working, take some time to clean your room and then indulge in cooking. In your leisure time, unwind by reading manhwa or watching a movie at home.",
+      weekendActivity: "On weekends, consider spending time with friends and family, participating in social events or outdoor activities. Balance your need for relaxation with opportunities for adventure and exploration.",
+      hangoutFriends: ["Citrus", "Kiwi"]
     },
     Berry: {
       description: "Perfect for individuals who are introspective, creative, and empathetic. You value deep connections and enjoy exploring new ideas.",
-      weekdayActivity: "On weekdays, take time for introspection and creative pursuits. Engage in activities that inspire you and allow you to express your creativity.",
-      weekendActivity: "Use your weekends to immerse yourself in artistic endeavors or spend time in nature. Seek out meaningful connections with loved ones and focus on nurturing your emotional well-being."
-    },
+      weekdayActivity: "On weekdays, take time for introspection and creative pursuits. Start your day with meditation or journaling to foster creativity. Engage in activities that inspire you, such as painting, writing, or playing musical instruments. After work, unwind by indulging in artistic endeavors or spending time in nature.",
+      weekendActivity: "Use your weekends to immerse yourself in artistic endeavors or spend time in nature. Seek out meaningful connections with loved ones and focus on nurturing your emotional well-being.",
+      hangoutFriends: ["Peach", "Citrus"]
+      },
     Citrus: {
       description: "Represents those who are enthusiastic and spontaneous, thriving on excitement and new experiences. You enjoy socializing and embracing adventures.",
-      weekdayActivity: "During weekdays, inject energy into your tasks and interactions. Seek out opportunities to collaborate with others and tackle new challenges with enthusiasm.",
-      weekendActivity: "On weekends, embrace spontaneity and excitement. Explore new places, try new activities, and connect with friends for memorable adventures."
+      weekdayActivity: "During weekdays, inject energy into your tasks and interactions. Seek out opportunities to collaborate with others and tackle new challenges with enthusiasm. In your free time, try out new cafes, or explore your surroundings.",
+      weekendActivity: "On weekends, embrace spontaneity and excitement. Explore new places, try new activities, and connect with friends for memorable adventures.",
+      hangoutFriends: ["Apple", "Kiwi"]
     },
     Peach: {
       description: "Ideal for those who are thoughtful and reserved, valuing deep connections and introspection. You appreciate quiet moments and meaningful conversations.",
-      weekdayActivity: "Weekdays are perfect for quiet reflection and focused work. Take time for meaningful conversations with colleagues or loved ones, and prioritize tasks that align with your values.",
-      weekendActivity: "Spend your weekends in peaceful settings, enjoying activities that bring you joy and relaxation. Whether it's reading a book, taking a leisurely walk, or spending time with close friends, prioritize self-care and rejuvenation."
+      weekdayActivity: "Weekdays are perfect for quiet reflection and focused work. Begin your day with mindfulness exercises or journaling to promote self-awareness. Take breaks to enjoy peaceful walks or have meaningful conversations with colleagues or loved ones. After work, unwind by engaging in activities that bring joy and relaxation, such as reading or cooking.",
+      weekendActivity: "Spend your weekends in peaceful settings, enjoying activities that bring you joy and relaxation. Whether it's reading a book, taking a leisurely walk, or spending time with close friends, prioritize self-care and rejuvenation.",
+      hangoutFriends: ["Berry", "Apple"]
     },
     Kiwi: {
       description: "Symbolizes individuals who are innovative and unconventional, challenging norms and embracing uniqueness. You seek out new perspectives and enjoy pushing boundaries.",
-      weekdayActivity: "Weekdays are an opportunity for innovation and creativity. Explore new ideas, challenge conventional thinking, and pursue projects that allow you to express your uniqueness.",
-      weekendActivity: "Use your weekends to explore unconventional activities and push your boundaries. Whether it's attending a workshop, trying a new hobby, or engaging in thought-provoking discussions, embrace your curiosity and thirst for knowledge."
+      weekdayActivity: "Weekdays are an opportunity for innovation and creativity. Start your day with brainstorming sessions or exploring new ideas. Challenge conventional thinking by pursuing projects that allow you to express your uniqueness. After work, engage in unconventional activities or thought-provoking discussions to stimulate your curiosity.",
+      weekendActivity: "Use your weekends to explore unconventional activities and push your boundaries. Whether it's attending a workshop, trying a new hobby, or engaging in thought-provoking discussions, embrace your curiosity and thirst for knowledge.",
+      hangoutFriends: ["Citrus", "Berry"]
     }
   };
+
   
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -147,29 +153,26 @@ function App() {
   };
 
   const determinePersonalityType = (answers) => {
-    const aCount = answers.A;
-    const bCount = answers.B;
-    if (aCount > bCount) {
-      return personalityTypes.A;
-    } else if (aCount < bCount) {
-      return personalityTypes.B;
-    } else {
-      switch (aCount + bCount) {
-        case 0:
-          return null;
-        case questions.length:
-          return "Balanced";
-        case 2:
+    const { A } = answers;
+    
+    switch (true) {
+      case (A <= 2):
           return personalityTypes.C;
-        case 4:
+      case (A <= 4):
           return personalityTypes.D;
-        case 6:
+      case (A <= 6):
           return personalityTypes.E;
-        default:
+      case (A <= 8):
+          return personalityTypes.A;
+      case (A <= 10):
+          return personalityTypes.B;
+      default:
           return null;
       }
-    }
-  };
+      
+      };
+
+
   const handleStartQuiz = () => {
     setShowIntro(false); // Hide the introduction when starting the quiz
   };
@@ -188,6 +191,8 @@ function App() {
             <p><strong>Description:</strong> {personalityDescriptions[personalityType].description}</p>
             <p><strong>Weekday Activities:</strong> {personalityDescriptions[personalityType].weekdayActivity}</p>
             <p><strong>Weekend Activities:</strong> {personalityDescriptions[personalityType].weekendActivity}</p>
+            <p><strong>Hangout Friends:</strong> {personalityDescriptions[personalityType].hangoutFriends.join(', ')}</p>
+         
           </div>
         ) : (
           // Render the question container if personalityType is null
