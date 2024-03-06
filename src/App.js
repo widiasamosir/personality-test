@@ -136,9 +136,7 @@ function App() {
     
     const selectedOption = (index === 0) ? "A" : "B";
 
-    // console.log(selectedOption);
     setAnswers({ ...answers, [selectedOption]: answers[selectedOption] + 1 });
-    // console.log(answers);
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
@@ -151,7 +149,6 @@ function App() {
   const determinePersonalityType = (answers) => {
     const aCount = answers.A;
     const bCount = answers.B;
-  
     if (aCount > bCount) {
       return personalityTypes.A;
     } else if (aCount < bCount) {
@@ -187,7 +184,7 @@ function App() {
           // Render the result container if personalityType is not null
           <div className="result-container">
             <h2>Your Personality Type: {personalityType}</h2>
-            <img src={require(`../src/img/${personalityType.toLowerCase()}.png`).default} alt={personalityType} />
+            <img src={require(`../src/img/${personalityType.toLowerCase()}.png`)} alt={personalityType} />
             <p><strong>Description:</strong> {personalityDescriptions[personalityType].description}</p>
             <p><strong>Weekday Activities:</strong> {personalityDescriptions[personalityType].weekdayActivity}</p>
             <p><strong>Weekend Activities:</strong> {personalityDescriptions[personalityType].weekendActivity}</p>
@@ -198,7 +195,7 @@ function App() {
             <h2>{questions[currentQuestion].question}</h2>
             <div className="options-container">
               {questions[currentQuestion].options.map((option, index) => (
-                <button key={index} onClick={() => handleOptionClick(index)}>
+                <button key={index} onClick={() => handleOptionClick(option,index)}>
                   {option}
                 </button>
               ))}
