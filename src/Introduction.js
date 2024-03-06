@@ -6,6 +6,9 @@ const Introduction = () => {
       <img src={require('../src/img/introduction.png')} alt="Introduction" />
       {/* <p>Welcome to the Personality Quiz!</p> */}
       <p>Click the button below to start the quiz.</p>
+      <footer className="footer">
+        <p>© elineelineangeline</p>
+      </footer>
     </div>
   );
 }

@@ -89,6 +89,8 @@ button:hover {
   margin-bottom: 15px;
 }
 
+
+
 @media screen and (max-width: 768px) {
   .result-container h2 {
     font-size: 20px;

@@ -178,7 +178,7 @@ function App() {
     <div className="App">
       <h1>Personality Test</h1>
       {showIntro ? (
-        <Introduction /> // Show the Introduction component if showIntro is true
+        <Introduction /> // Show the Introduction component if showIntro is true     
       ) : (
         personalityType ? (
           // Render the result container if personalityType is not null
@@ -205,7 +205,7 @@ function App() {
       )}
       {showIntro && (
         <button className="start-button" onClick={handleStartQuiz}>Start Quiz</button> // Button to start the quiz
-      )}
+      )}   
     </div>
   );
 }
