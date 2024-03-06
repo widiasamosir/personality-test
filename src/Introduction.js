@@ -7,7 +7,7 @@ const Introduction = () => {
       {/* <p>Welcome to the Personality Quiz!</p> */}
       <p>Click the button below to start the quiz.</p>
       <footer className="footer">
-        <p>© elineelineangeline</p>
+        <p>© cheonsa</p>
       </footer>
     </div>
   );
