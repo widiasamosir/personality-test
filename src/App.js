@@ -141,13 +141,16 @@ function App() {
   const handleOptionClick = (option,index) => {
     
     const selectedOption = (index === 0) ? "A" : "B";
-
+    console.log(answers);
+    console.log(questions.length - 1);
     setAnswers({ ...answers, [selectedOption]: answers[selectedOption] + 1 });
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
       // Determine personality type
       const result = determinePersonalityType(answers);
+      console.log(result);
+
       setPersonalityType(result);
     }
   };
@@ -156,20 +159,19 @@ function App() {
     const { A } = answers;
     
     switch (true) {
-      case (A <= 2):
-          return personalityTypes.C;
       case (A <= 4):
-          return personalityTypes.D;
-      case (A <= 6):
-          return personalityTypes.E;
+      return personalityTypes.C; // Questions 1-4
       case (A <= 8):
-          return personalityTypes.A;
-      case (A <= 10):
-          return personalityTypes.B;
+          return personalityTypes.D; // Questions 5-8
+      case (A <= 12):
+          return personalityTypes.E; // Questions 9-12
+      case (A <= 16):
+          return personalityTypes.A; // Questions 13-16
+      case (A <= 20):
+          return personalityTypes.B; // Questions 17-20
       default:
           return null;
-      }
-      
+    }
       };
 
 
